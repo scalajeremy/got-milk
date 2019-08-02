@@ -66,7 +66,6 @@ function PlayerHud(){ // function qui affichera les information du joueur
     You own ${ground} ground. You need a ground for 3 cows.<br />
     ${timeCalculator()} days passed<br />
     `;
-    console.log(creditPlayer);
 }
 
 function production()
@@ -94,6 +93,36 @@ function payTheMan(){
 
 }
 
+function modal(title, moneyToLoan, year, func){
+    let modal = `
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">${title}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">
+                        
+                    </span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    You need ${moneyToLoan} to buy this.<br/>
+                    Do you want to make a loan for the next ${year} years?      
+                </div>
+                <div class="modal-footer">
+                <button id="func" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>`;
+    document.getElementById('modal-target').innerHTML=modal;
+
+    document.getElementById('func').addEventListener('click', func)
+}
+
+
 document.getElementById("buyCowButton").addEventListener("click",() => {
     if(ground == 0)
     {
@@ -108,6 +137,7 @@ document.getElementById("buyCowButton").addEventListener("click",() => {
         else if(cowCost>baseMoneyPlayer)
         {
             Error("too poor to buy a cow, make a credit or wait for benefit.");
+            modal("test",'test','test', null)
         } 
         else
         {
@@ -116,6 +146,7 @@ document.getElementById("buyCowButton").addEventListener("click",() => {
         }
     }
 });
+
 
 document.getElementById("buyGroundButton").addEventListener("click",() => {
     if(groundCost<=baseMoneyPlayer)
@@ -134,20 +165,20 @@ document.getElementById("sellMilk").addEventListener("click",() => {
     milkStocked = 0;
 });
 
-document.getElementById("creditConfirm").addEventListener("click",() => {
-    let amount = document.getElementById("moneyLawn").value;
-    let timeToPay = document.getElementById("paybackTime").value*12;
-    baseMoneyPlayer += +amount;
-    creditPlayer.push(new Loan(amount,timeToPay));
+// document.getElementById("creditConfirm").addEventListener("click",() => {
+//     let amount = document.getElementById("moneyLawn").value;
+//     let timeToPay = document.getElementById("paybackTime").value*12;
+//     baseMoneyPlayer += +amount;
+//     creditPlayer.push(new Loan(amount,timeToPay));
 
-    Error(`
-    you concrated a credit of ${creditPlayer[creditPlayer.length-1].amount}$, <br /> 
-    for a total of ${creditPlayer[creditPlayer.length-1].TotalCreditCost}$<br />
-    This will be ${creditPlayer[creditPlayer.length-1].monthToPay} month long.
-    `
-    );
+//     Error(`
+//     you concrated a credit of ${creditPlayer[creditPlayer.length-1].amount}$, <br /> 
+//     for a total of ${creditPlayer[creditPlayer.length-1].TotalCreditCost}$<br />
+//     This will be ${creditPlayer[creditPlayer.length-1].monthToPay} month long.
+//     `
+//     );
 
-});
+// });
 
 function main(){
     PlayerHud();
