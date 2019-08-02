@@ -38,6 +38,7 @@ let herd = []; // troupeau
 let ground = 0; // number of ground
 
 let cowforGround = 3;
+let pacsForSingleCow = 150;
 
 let milkStocked = 0;
 
@@ -66,7 +67,6 @@ function PlayerHud(){ // function qui affichera les information du joueur
     You own ${ground} ground. You need a ground for 3 cows.<br />
     ${timeCalculator()} days passed<br />
     `;
-    console.log(creditPlayer);
 }
 
 function production()
@@ -90,9 +90,52 @@ function payTheMan(){
             }
         }
     }
-
-
 }
+
+function PACS(){
+    if(timeElapsed%1460 == 0){
+        pacs = herd.length * pacsForSingleCow;
+        baseMoneyPlayer += pacs;
+        Error(`You received ${pacsForSingleCow}$ for each cow. For a total of pacs ${pacs}`);
+    }
+}
+
+function modal(title, moneyToLoan, year, func){
+    let modal = `
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">${title}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">
+                        
+                    </span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    You need ${moneyToLoan} to buy this.<br/>
+                    Do you want to make a loan for the next ${year} years?      
+                </div>
+                <div class="modal-footer">
+                <button type="button" id ="clear" class="btn btn-secondary" data-dismiss="modal">Refuse</button>
+                <button id="func" type="button" class="btn btn-primary" data-dismiss="modal">Accept</button>
+                </div>
+            </div>
+        </div>
+    </div>`;
+    document.getElementById('modal-target').innerHTML=modal;
+
+    document.getElementById('func').addEventListener('click', () => func(moneyToLoan,year))
+    document.getElementById('clear').addEventListener('click', () => document.getElementById('clear').innerHTML='');
+}
+
+function creditAction(moneyToLoan,year){
+    creditPlayer.push(new Loan(moneyToLoan,year*12));
+    baseMoneyPlayer += +moneyToLoan;
+    document.getElementById('modal-target').innerHTML='';
+}
+
 
 document.getElementById("buyCowButton").addEventListener("click",() => {
     if(ground == 0)
@@ -108,6 +151,7 @@ document.getElementById("buyCowButton").addEventListener("click",() => {
         else if(cowCost>baseMoneyPlayer)
         {
             Error("too poor to buy a cow, make a credit or wait for benefit.");
+            modal("too poor to buy a cow,",1435,3, creditAction);
         } 
         else
         {
@@ -117,15 +161,18 @@ document.getElementById("buyCowButton").addEventListener("click",() => {
     }
 });
 
+
 document.getElementById("buyGroundButton").addEventListener("click",() => {
     if(groundCost<=baseMoneyPlayer)
     {
         ground++;
         baseMoneyPlayer -= groundCost;
+        
     } 
     else
     {
         Error("too poor to buy a ground, make a credit or wait for benefit.");
+        modal("too poor to buy a cow,",6000,10, creditAction);
     }
 });
 
@@ -134,26 +181,27 @@ document.getElementById("sellMilk").addEventListener("click",() => {
     milkStocked = 0;
 });
 
-document.getElementById("creditConfirm").addEventListener("click",() => {
-    let amount = document.getElementById("moneyLawn").value;
-    let timeToPay = document.getElementById("paybackTime").value*12;
-    baseMoneyPlayer += +amount;
-    creditPlayer.push(new Loan(amount,timeToPay));
+// document.getElementById("creditConfirm").addEventListener("click",() => {
+//     let amount = document.getElementById("moneyLawn").value;
+//     let timeToPay = document.getElementById("paybackTime").value*12;
+//     baseMoneyPlayer += +amount;
+//     creditPlayer.push(new Loan(amount,timeToPay));
 
-    Error(`
-    you concrated a credit of ${creditPlayer[creditPlayer.length-1].amount}$, <br /> 
-    for a total of ${creditPlayer[creditPlayer.length-1].TotalCreditCost}$<br />
-    This will be ${creditPlayer[creditPlayer.length-1].monthToPay} month long.
-    `
-    );
+//     Error(`
+//     you concrated a credit of ${creditPlayer[creditPlayer.length-1].amount}$, <br /> 
+//     for a total of ${creditPlayer[creditPlayer.length-1].TotalCreditCost}$<br />
+//     This will be ${creditPlayer[creditPlayer.length-1].monthToPay} month long.
+//     `
+//     );
 
-});
+// });
 
 function main(){
     PlayerHud();
     production();
     timeElapsed++;
     payTheMan();
+    PACS();
     
 }
 
