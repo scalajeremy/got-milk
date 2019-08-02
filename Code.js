@@ -96,7 +96,7 @@ function PACS(){
     if(timeElapsed%1460 == 0){
         pacs = herd.length * pacsForSingleCow;
         baseMoneyPlayer += pacs;
-        Error(`You received 200$ for each cow. For a total of pacs ${pacs}`);
+        Error(`You received ${pacsForSingleCow}$ for each cow. For a total of pacs ${pacs}`);
     }
 }
 
@@ -118,15 +118,21 @@ function modal(title, moneyToLoan, year, func){
                     Do you want to make a loan for the next ${year} years?      
                 </div>
                 <div class="modal-footer">
-                <button id="func" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Refuse</button>
+                <button id="func" type="button" class="btn btn-primary" data-dismiss="modal">Accept</button>
                 </div>
             </div>
         </div>
     </div>`;
     document.getElementById('modal-target').innerHTML=modal;
 
-    document.getElementById('func').addEventListener('click', func)
+    document.getElementById('func').addEventListener('click', () => func(moneyToLoan,year))
+}
+
+function creditAction(moneyToLoan,year){
+    creditPlayer.push(new Loan(moneyToLoan,year*12));
+    baseMoneyPlayer += +moneyToLoan;
+    document.getElementById('modal-target').innerHTML='';
 }
 
 
@@ -144,13 +150,12 @@ document.getElementById("buyCowButton").addEventListener("click",() => {
         else if(cowCost>baseMoneyPlayer)
         {
             Error("too poor to buy a cow, make a credit or wait for benefit.");
-            modal("test",'test','test', null)
+            modal("too poor to buy a cow,",1435,3, creditAction);
         } 
         else
         {
             herd.push(new Cow(0));
             baseMoneyPlayer -= cowCost;
-            ia("buyCow");
         }
     }
 });
@@ -161,10 +166,12 @@ document.getElementById("buyGroundButton").addEventListener("click",() => {
     {
         ground++;
         baseMoneyPlayer -= groundCost;
+        
     } 
     else
     {
         Error("too poor to buy a ground, make a credit or wait for benefit.");
+        modal("too poor to buy a cow,",6000,10, creditAction);
     }
 });
 
