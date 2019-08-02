@@ -1,9 +1,19 @@
 $main: #E4F2EC;
 
+
+// font-family: 'Jua', sans-serif;
+// font-family: 'Baloo Chettan', cursive;
+// font-family: 'Baloo Bhaijaan', cursive;
+// font-family: 'Galada', cursive;
+
 body {
     background: $main;
     margin: 0;
+}
 
+h1{
+    font-family: 'Galada', cursive;
+    text-align: center;
 }
 
 #divError {

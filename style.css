@@ -3,6 +3,11 @@ body {
   margin: 0;
 }
 
+h1 {
+  font-family: "Galada", cursive;
+  text-align: center;
+}
+
 #divError {
   display: none;
 }
