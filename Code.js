@@ -1,22 +1,22 @@
 (() => {
     let Cow = class Cow {
-    constructor(){
-        let spanLife= 7300;
-        let currentLifeTime=0;
+        constructor(){
+            let spanLife= 7300;
+            let currentLifeTime=0;
+        }
+
     }
 
-}
+    let Loan = class Loan{
+        constructor(amount, monthToPay){
+            this.amount=amount;
+            this.monthToPay = monthToPay;
+            this.TotalCreditCost = (amount/100*121).toFixed(0);
+            this.mensuality = this.TotalCreditCost/monthToPay;
+            this.remain = this.TotalCreditCost;
+        }
 
-let Loan = class Loan{
-    constructor(amount, monthToPay){
-        this.amount=amount;
-        this.monthToPay = monthToPay;
-        this.TotalCreditCost = (amount/100*121).toFixed(0);
-        this.mensuality = this.TotalCreditCost/monthToPay;
-        this.remain = this.TotalCreditCost;
     }
-
-}
 
 // player = le joueur
 // JustRuledPlayer = joueur avec regle juste de production
@@ -44,7 +44,9 @@ let milkStocked = 0;
 let timeElapsed = 0;
 
 function Error(string){
-    document.getElementById('divError').innerHTML= string;
+    let error = document.getElementById('divError');
+    error.style.display = "block";
+    error.innerText = string;
 }
 
 function timeCalculator()
@@ -70,21 +72,22 @@ function PlayerHud(){ // function qui affichera les information du joueur
 function production()
 {
     milkStocked += herd.length;
-    baseMoneyPlayer -= herd.length*MilkProductionPricePlayer;
+    baseMoneyPlayer -= herd.length*MilkProductionPricePlayer/1.2;
 
 }
 
 function payTheMan(){
-    
-    if(timeElapsed%120 == 0){
-        if(creditPlayer.length > 0){
-            creditPlayer.forEach((el,id,arr) => {
-                baseMoneyPlayer -= el.mensuality;
-                el.remain -= el.mensuality;
-                if(el.remain <= 0){
-                    arr.splice(id,1);
-                }
-            });
+    if (creditPlayer){
+        if(timeElapsed%120 == 0){
+            if(creditPlayer.length > 0){
+                creditPlayer.forEach((el,id,arr) => {
+                    baseMoneyPlayer -= el.mensuality;
+                    el.remain -= el.mensuality;
+                    if(el.remain <= 0){
+                        arr.splice(id,1);
+                    }
+                });
+            }
         }
     }
 
