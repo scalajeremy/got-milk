@@ -90,8 +90,14 @@ function payTheMan(){
             }
         }
     }
+}
 
-
+function PACS(){
+    if(timeElapsed%1460 == 0){
+        pacs = herd.length * 200;
+        baseMoneyPlayer += pacs;
+        Error(`You received 200$ for each cow. For a total of pacs ${pacs}`);
+    }
 }
 
 document.getElementById("buyCowButton").addEventListener("click",() => {
@@ -113,6 +119,7 @@ document.getElementById("buyCowButton").addEventListener("click",() => {
         {
             herd.push(new Cow(0));
             baseMoneyPlayer -= cowCost;
+            ia("buyCow");
         }
     }
 });
@@ -154,6 +161,7 @@ function main(){
     production();
     timeElapsed++;
     payTheMan();
+    PACS();
     
 }
 
