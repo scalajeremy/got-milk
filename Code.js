@@ -118,7 +118,7 @@ function modal(title, moneyToLoan, year, func){
                     Do you want to make a loan for the next ${year} years?      
                 </div>
                 <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Refuse</button>
+                <button type="button" id ="clear" class="btn btn-secondary" data-dismiss="modal">Refuse</button>
                 <button id="func" type="button" class="btn btn-primary" data-dismiss="modal">Accept</button>
                 </div>
             </div>
@@ -127,6 +127,7 @@ function modal(title, moneyToLoan, year, func){
     document.getElementById('modal-target').innerHTML=modal;
 
     document.getElementById('func').addEventListener('click', () => func(moneyToLoan,year))
+    document.getElementById('clear').addEventListener('click', () => document.getElementById('clear').innerHTML='');
 }
 
 function creditAction(moneyToLoan,year){
