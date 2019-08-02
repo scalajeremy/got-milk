@@ -11,7 +11,8 @@ let Loan = class Loan{
     constructor(amount, monthToPay){
         this.amount=amount;
         this.monthToPay = monthToPay;
-        let mensuality = amount/100*121;
+        this.TotalCreditCost = (amount/100*121).toFixed(0);
+        this.mensuality = this.TotalCreditCost/monthToPay;
     }
 
 }
@@ -35,18 +36,32 @@ let groundCost = 6000;
 let herd = []; // troupeau 
 let ground = 0; // number of ground
 
+let cowforGround = 3;
+
 let milkStocked = 0;
+
+let timeElapsed = 0;
 
 function Error(string){
     document.getElementById('divError').innerHTML= string;
 }
 
+function timeCalculator()
+{
+    let dayPassed = timeElapsed/4;
+
+    return dayPassed.toFixed(0);
+}
+
 function PlayerHud(){ // function qui affichera les information du joueur
     document.getElementById("gameInformation").innerHTML = 
     `
-    ${baseMoneyPlayer} / ${baseMoneyJustRuledPlayer}
-    <progress id="ProgressPlayer" max="${baseMoneyJustRuledPlayer}" value="${baseMoneyPlayer}"> ${baseMoneyPlayer} / ${baseMoneyJustRuledPlayer} </progress>
-    Milk in stock ${milkStocked}
+    ${baseMoneyPlayer.toFixed(2)} / ${baseMoneyJustRuledPlayer}<br />
+    <progress id="ProgressPlayer" max="${baseMoneyJustRuledPlayer}" value="${baseMoneyPlayer}"> ${baseMoneyPlayer} / ${baseMoneyJustRuledPlayer} </progress><br />
+    You have ${milkStocked}L of milk stocked.<br />
+    You own ${herd.length} cows in your herd.<br />
+    You own ${ground} ground. You need a ground for 3 cows.<br />
+    ${timeCalculator()} days passed<br />
     `;
 }
 
@@ -58,14 +73,25 @@ function production()
 }
 
 document.getElementById("buyCowButton").addEventListener("click",() => {
-    if(cowCost<=baseMoneyPlayer)
+    if(ground == 0)
     {
-        herd.push(new Cow(0));
-        baseMoneyPlayer -= cowCost;
-    } 
-    else
-    {
-        Error("too poor to buy a cow, make a credit or wait for benefit.");
+        Error("Not enough ground to room your cow. Buy some ground");
+    }
+    else{
+
+        if(herd.length/cowforGround >= ground)
+        {
+            Error("Not enough ground to room your cow. Buy some ground");
+        }
+        else if(cowCost>baseMoneyPlayer)
+        {
+            Error("too poor to buy a cow, make a credit or wait for benefit.");
+        } 
+        else
+        {
+            herd.push(new Cow(0));
+            baseMoneyPlayer -= cowCost;
+        }
     }
 });
 
@@ -86,13 +112,28 @@ document.getElementById("sellMilk").addEventListener("click",() => {
     milkStocked = 0;
 });
 
+document.getElementById("creditConfirm").addEventListener("click",() => {
+    let amount = document.getElementById("moneyLawn").value;
+    let timeToPay = document.getElementById("paybackTime").value*12;
+    creditPlayer.push(new Loan(amount,timeToPay));
+
+    Error(`
+    you concrated a credit of ${creditPlayer[creditPlayer.length-1].amount}$, <br /> 
+    for a total of ${creditPlayer[creditPlayer.length-1].TotalCreditCost}$<br />
+    This will be ${creditPlayer[creditPlayer.length-1].monthToPay} month long.
+    `
+    );
+
+});
+
 function main(){
     PlayerHud();
     production();
+    timeElapsed++;
     
 }
 
-setInterval(main,60);
+setInterval(main,100);
 
 })();
 
