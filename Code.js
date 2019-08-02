@@ -13,6 +13,7 @@ let Loan = class Loan{
         this.monthToPay = monthToPay;
         this.TotalCreditCost = (amount/100*121).toFixed(0);
         this.mensuality = this.TotalCreditCost/monthToPay;
+        this.remain = this.TotalCreditCost;
     }
 
 }
@@ -63,12 +64,30 @@ function PlayerHud(){ // function qui affichera les information du joueur
     You own ${ground} ground. You need a ground for 3 cows.<br />
     ${timeCalculator()} days passed<br />
     `;
+    console.log(creditPlayer);
 }
 
 function production()
 {
     milkStocked += herd.length;
     baseMoneyPlayer -= herd.length*MilkProductionPricePlayer;
+
+}
+
+function payTheMan(){
+    
+    if(timeElapsed%120 == 0){
+        if(creditPlayer.length > 0){
+            creditPlayer.forEach((el,id,arr) => {
+                baseMoneyPlayer -= el.mensuality;
+                el.remain -= el.mensuality;
+                if(el.remain <= 0){
+                    arr.splice(id,1);
+                }
+            });
+        }
+    }
+
 
 }
 
@@ -115,6 +134,7 @@ document.getElementById("sellMilk").addEventListener("click",() => {
 document.getElementById("creditConfirm").addEventListener("click",() => {
     let amount = document.getElementById("moneyLawn").value;
     let timeToPay = document.getElementById("paybackTime").value*12;
+    baseMoneyPlayer += +amount;
     creditPlayer.push(new Loan(amount,timeToPay));
 
     Error(`
@@ -130,10 +150,11 @@ function main(){
     PlayerHud();
     production();
     timeElapsed++;
+    payTheMan();
     
 }
 
-setInterval(main,100);
+setInterval(main,33);
 
 })();
 
