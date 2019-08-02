@@ -38,6 +38,7 @@ let herd = []; // troupeau
 let ground = 0; // number of ground
 
 let cowforGround = 3;
+let pacsForSingleCow = 150;
 
 let milkStocked = 0;
 
@@ -94,7 +95,7 @@ function payTheMan(){
 
 function PACS(){
     if(timeElapsed%1460 == 0){
-        pacs = herd.length * 200;
+        pacs = herd.length * pacsForSingleCow;
         baseMoneyPlayer += pacs;
         Error(`You received 200$ for each cow. For a total of pacs ${pacs}`);
     }
