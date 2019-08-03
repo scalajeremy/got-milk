@@ -139,7 +139,7 @@
                 </div>
                 <div class="modal-footer">
                 <button type="button" id ="clear" class="btn btn-secondary" data-dismiss="modal">Refuse</button>
-                <button id="func" type="button" class="btn btn-primary" data-dismiss="modal">Accept</button>
+                <button id="func" id='clear' type="button" class="btn btn-primary" data-dismiss="modal">Accept</button>
                 </div>
             </div>
         </div>
@@ -147,13 +147,12 @@
         document.getElementById('modal-target').innerHTML = modal;
 
         document.getElementById('func').addEventListener('click', () => func(moneyToLoan, year))
-        document.getElementById('clear').addEventListener('click', () => document.getElementById('clear').innerHTML = '');
+        document.getElementById('clear').addEventListener('click', () => document.getElementById('modal-target').innerHTML = '');
     }
 
     function creditAction(moneyToLoan, year) {
         creditPlayer.push(new Loan(moneyToLoan, year * 12));
         baseMoneyPlayer += +moneyToLoan;
-        document.getElementById('modal-target').innerHTML = '';
     }
 
     function ia(action) {
