@@ -268,7 +268,7 @@
         }
         else {
             Error("too poor to buy a ground, make a credit or wait for benefit.");
-            modal("too poor to buy a cow,", 6000, 10, creditAction);
+            modal("too poor to buy a ground,", 6000, 10, creditAction);
         }
         
     });
