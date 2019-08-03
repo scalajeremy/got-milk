@@ -251,8 +251,7 @@
 
         logTheShit();
 
-        baseMoneyJustRuledPlayer -= generalLifeCost;
-        baseMoneyPlayer-= generalLifeCost;
+        b
 
         if(baseMoneyPlayer <= 0 && milkStocked > 0){
             document.getElementById("sellMilk").click();
@@ -262,6 +261,9 @@
             clearInterval(loop);
             Error("No money, No milk... You Lose! Sorry!");
         }
+
+        aseMoneyJustRuledPlayer -= generalLifeCost;
+        baseMoneyPlayer-= generalLifeCost;
 
     }
 
