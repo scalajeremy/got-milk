@@ -1,0 +1,98 @@
+$main: #E4F2EC;
+$terrain: #B0A060;
+$cow: #E2C49D;
+$milk: #FDFDFD;
+
+// font-family: 'Jua', sans-serif;
+// font-family: 'Baloo Chettan', cursive;
+// font-family: 'Baloo Bhaijaan', cursive;
+// font-family: 'Galada', cursive;
+
+body {
+    background: $main;
+    margin: 0;
+}
+
+.container {
+    width: 50%;
+}
+
+h1{
+    font-family: 'Galada', cursive;
+    text-align: center;
+    margin: 30px;
+}
+
+.btn{
+    border-radius: 25px;
+    padding: 10px;
+    width: 10rem;
+    font-family: 'Baloo Chettan', cursive;
+    min-height: 70px;
+}
+
+.font{
+    font-family: 'Baloo Chettan', cursive;
+}
+
+#buyGroundButton{
+    background-color: $terrain;
+    &:hover {
+        background: darken( $terrain, 10% );
+      }
+}
+#buyCowButton{
+    background-color: $cow;
+    &:hover {
+        background: darken( $cow, 10% );
+      }
+}
+#sellMilk{
+    background-color: $milk;
+    &:hover {
+        background: darken( $milk, 10% );
+      }
+}
+
+#divError {
+    display:none;
+}
+
+$terrain:  200px;
+
+.buy{
+    background-image: url(./assets/terrain_buy.svg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    min-width: $terrain;
+    min-height: $terrain;
+}
+
+.one-cow{
+    background-image: url(./assets/terrain_one.svg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    min-width: $terrain;
+    min-height: $terrain;
+}
+.two-cow{
+    background-image: url(./assets/terrain_two.svg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    min-width: $terrain;
+    min-height: $terrain;
+}
+.three-cow{
+    background-image: url(./assets/terrain_three.svg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    min-width: $terrain;
+    min-height: $terrain;
+}
+.blank{
+    background-image: url(./assets/terrain_blank.svg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    min-width: $terrain;
+    min-height: $terrain;
+}

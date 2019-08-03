@@ -1,0 +1,93 @@
+body {
+  background: #E4F2EC;
+  margin: 0;
+}
+
+.container {
+  width: 50%;
+}
+
+h1 {
+  font-family: "Galada", cursive;
+  text-align: center;
+  margin: 30px;
+}
+
+.btn {
+  border-radius: 25px;
+  padding: 10px;
+  width: 10rem;
+  font-family: "Baloo Chettan", cursive;
+  min-height: 70px;
+}
+
+.font {
+  font-family: "Baloo Chettan", cursive;
+}
+
+#buyGroundButton {
+  background-color: #B0A060;
+}
+#buyGroundButton:hover {
+  background: #948549;
+}
+
+#buyCowButton {
+  background-color: #E2C49D;
+}
+#buyCowButton:hover {
+  background: #d6ac76;
+}
+
+#sellMilk {
+  background-color: #FDFDFD;
+}
+#sellMilk:hover {
+  background: #e4e4e4;
+}
+
+#divError {
+  display: none;
+}
+
+.buy {
+  background-image: url(./assets/terrain_buy.svg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  min-width: 200px;
+  min-height: 200px;
+}
+
+.one-cow {
+  background-image: url(./assets/terrain_one.svg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  min-width: 200px;
+  min-height: 200px;
+}
+
+.two-cow {
+  background-image: url(./assets/terrain_two.svg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  min-width: 200px;
+  min-height: 200px;
+}
+
+.three-cow {
+  background-image: url(./assets/terrain_three.svg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  min-width: 200px;
+  min-height: 200px;
+}
+
+.blank {
+  background-image: url(./assets/terrain_blank.svg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  min-width: 200px;
+  min-height: 200px;
+}
+
+/*# sourceMappingURL=style.css.map */
