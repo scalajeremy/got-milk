@@ -13,14 +13,22 @@ h1 {
   margin: 30px;
 }
 
-progress {
-  display: block;
-  margin: auto;
+.btn {
+  border-radius: 50px;
+  padding: 10px;
+  width: 10rem;
 }
 
-#ProgressPlayer {
-  width: 75%;
-  margin: auto;
+#buyGroundButton {
+  background-color: #B0A060;
+}
+
+#buyCowButton {
+  background-color: #E2C49D;
+}
+
+#sellMilk {
+  background-color: #FDFDFD;
 }
 
 #divError {
