@@ -1,9 +1,10 @@
-// import {coins} from './assets/coins.svg'; 
+
+
 (() => {
     let Cow = class Cow {
         constructor() {
-            let spanLife = 7300;
-            let currentLifeTime = 0;
+            this.spanLife = 7300;
+            this.currentLifeTime = 0;
         }
 
     }
@@ -38,7 +39,47 @@
     let cowCost = 1435;
     let groundCost = 6000;
 
-    let herd = []; // troupeau 
+    let herd = [];
+    
+    let herdTemplate = [
+        {
+                possessed: false,
+                cows:[],
+        },
+        {
+                possessed: false,
+                cows:[],
+        },
+        {
+                possessed: false,
+                cows:[],
+        },
+        {
+                possessed: false,
+                cows:[],
+        },
+        {
+                possessed: false,
+                cows:[],
+        },
+        {
+                possessed: false,
+                cows:[],
+        },
+        {
+                possessed: false,
+                cows:[],
+        },
+        {
+                possessed: false,
+                cows:[],
+        },
+        {
+                possessed: false,
+                cows:[],
+        },
+    ]; // troupeau 
+    console.log(herdTemplate)
     let ground = 0; // number of ground
 
     let cowforGround = 3;
@@ -48,6 +89,8 @@
 
     let timeElapsed = 0;
     let LoopSpeed = 1;
+
+    let objectTemp= {};
 
     function Error(string) {
         let error = document.getElementById('divError');
@@ -146,7 +189,7 @@
     </div>`;
         document.getElementById('modal-target').innerHTML = modal;
 
-        document.getElementById('func').addEventListener('click', () => func(moneyToLoan, year))
+        document.getElementById('func').addEventListener('click', () => {func(moneyToLoan, year);})
         document.getElementById('clear').addEventListener('click', () => document.getElementById('modal-target').innerHTML = '');
     }
 
@@ -191,9 +234,18 @@
                 modal("too poor to buy a cow,", 1435, 3, creditAction);
             }
             else {
-                herd.push(new Cow(0));
+                herd.push(new Cow);
                 baseMoneyPlayer -= cowCost;
                 ia("cow");
+                for (let i = 0; i < herdTemplate.length; i++) {
+                    const element = herdTemplate[i];
+                    if (element.cows.length <3){
+                        element.cows.push(new Cow)
+                        break;
+                    }
+                    
+                }
+                checkCows();
             }
         }
     });
@@ -204,12 +256,21 @@
             ground++;
             baseMoneyPlayer -= groundCost;
             ia("ground")
-
+            checkCows();
+            for (let i = 0; i < herdTemplate.length; i++) {
+                const element = herdTemplate[i];
+                if (element.possessed === false){
+                    element.possessed =true;
+                    document.getElementById(i+1).innerHTML=' <div class="blank"></div>';
+                    break;
+                }
+            }
         }
         else {
             Error("too poor to buy a ground, make a credit or wait for benefit.");
             modal("too poor to buy a cow,", 6000, 10, creditAction);
         }
+        
     });
 
     document.getElementById("sellMilk").addEventListener("click", () => {
@@ -219,21 +280,32 @@
         
     });
 
-    // document.getElementById("creditConfirm").addEventListener("click",() => {
-    //     let amount = document.getElementById("moneyLawn").value;
-    //     let timeToPay = document.getElementById("paybackTime").value*12;
-    //     baseMoneyPlayer += +amount;
-    //     creditPlayer.push(new Loan(amount,timeToPay));
-
-    //     Error(`
-    //     you concrated a credit of ${creditPlayer[creditPlayer.length-1].amount}$, <br /> 
-    //     for a total of ${creditPlayer[creditPlayer.length-1].TotalCreditCost}$<br />
-    //     This will be ${creditPlayer[creditPlayer.length-1].monthToPay} month long.
-    //     `
-    //     );
-
-    // });
-
+    
+    
+   function checkCows(){
+        herdTemplate.forEach((enclo,i=0) => {
+            i++
+            html = document.getElementById(i);
+            if(!enclo.possessed){
+                html.innerHTML = '<div class="buy"></div>';
+            }else{
+                switch(enclo.cows.length){
+                    case 0:
+                        html.innerHTML =' <div class="blank"></div>';
+                        break;
+                    case 1:
+                        html.innerHTML = '<div class="one-cow"></div>'
+                        break;
+                    case 2:
+                        html.innerHTML = '<div class="two-cow"></div>'
+                        break;
+                    case 3:
+                        html.innerHTML = '<div class="three-cow"></div>'
+                        break;
+                }
+            }
+        });
+    }
     function main() {
         PlayerHud();
         production();
@@ -244,7 +316,7 @@
         payTheManJustRuled();
 
         PACS();
-
+        
         if(baseMoneyPlayer <= 0 && milkStocked > 0){
             document.getElementById("sellMilk").click();
             Error("you ran out of money, automaticaly sell all the milk.");
