@@ -7,11 +7,23 @@
     <title>Milk</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Baloo+Bhaijaan|Baloo+Chettan|Galada|Jua&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
+        <h1>Got Milk</h1>
         <div id="divError" class="alert alert-danger" role="alert"></div>
-        <div id="gameInformation"></div>
+        <div class="row text-center">
+            <div class="col-4">
+                <img src="./assets/coins.svg" width="50px"/><p id="coins"></p>
+            </div>
+            <div class="col-4">
+                <img src="./assets/milk.svg" width="50px"/><p id="milk"></p> 
+            </div>
+            <div class="col-4">
+                <img src="./assets/weekly-calendar.svg" width="50px"/><p id="time"></p>
+            </div>
+        </div>
         <button id="buyCowButton" data-toggle="modal" data-target="#modal">Buy a cow.</button>
         <button id="buyGroundButton" data-toggle="modal" data-target="#modal">Buy a ground</button>
         <button id="sellMilk">Sell your milk</button><br /><br />

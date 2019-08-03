@@ -1,11 +1,33 @@
 $main: #E4F2EC;
 
+
+// font-family: 'Jua', sans-serif;
+// font-family: 'Baloo Chettan', cursive;
+// font-family: 'Baloo Bhaijaan', cursive;
+// font-family: 'Galada', cursive;
+
 body {
     background: $main;
     margin: 0;
-
 }
 
+.container {
+    width: 50%;
+}
+
+h1{
+    font-family: 'Galada', cursive;
+    text-align: center;
+    margin: 30px;
+}
+progress {
+    display: block;
+    margin: auto;
+}
+#ProgressPlayer{
+    width: 75%;
+    margin: auto;
+}
 #divError {
     display:none;
 }

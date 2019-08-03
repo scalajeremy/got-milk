@@ -1,3 +1,4 @@
+// import {coins} from './assets/coins.svg'; 
 (() => {
     let Cow = class Cow {
         constructor() {
@@ -60,17 +61,16 @@
         return dayPassed.toFixed(0);
     }
 
-    function PlayerHud() { // function qui affichera les information du joueur
-        document.getElementById("gameInformation").innerHTML =
-            `
-    ${baseMoneyPlayer.toFixed(0)} / ${baseMoneyJustRuledPlayer}<br />
-    <progress id="ProgressPlayer" max="${baseMoneyJustRuledPlayer}" value="${baseMoneyPlayer}"> ${baseMoneyPlayer} / ${baseMoneyJustRuledPlayer} </progress><br />
-    You have ${milkStocked}L of milk stocked.<br />
-    You own ${herd.length} cows in your herd.<br />
-    You own ${ground} ground. You need a ground for 3 cows.<br />
-    ${timeCalculator()} days passed<br />
-    `;
+    function PlayerHud(){ // function qui affichera les information du joueur
+    
+        document.getElementById("coins").innerHTML = 
+            `${baseMoneyPlayer.toFixed(2)}`;
+        document.getElementById('milk').innerHTML =
+            `${milkStocked}`;
+        document.getElementById("time").innerHTML =
+            ` ${timeCalculator()}`;
     }
+    
 
     function production() {
         milkStocked += herd.length;
@@ -107,6 +107,7 @@
                         }
                     });
                 }
+
             }
         }
     }
