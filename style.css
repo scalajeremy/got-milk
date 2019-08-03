@@ -14,21 +14,36 @@ h1 {
 }
 
 .btn {
-  border-radius: 50px;
+  border-radius: 25px;
   padding: 10px;
   width: 10rem;
+  font-family: "Baloo Chettan", cursive;
+  min-height: 70px;
+}
+
+.font {
+  font-family: "Baloo Chettan", cursive;
 }
 
 #buyGroundButton {
   background-color: #B0A060;
 }
+#buyGroundButton:hover {
+  background: #948549;
+}
 
 #buyCowButton {
   background-color: #E2C49D;
 }
+#buyCowButton:hover {
+  background: #d6ac76;
+}
 
 #sellMilk {
   background-color: #FDFDFD;
+}
+#sellMilk:hover {
+  background: #e4e4e4;
 }
 
 #divError {

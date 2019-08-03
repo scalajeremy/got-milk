@@ -64,11 +64,11 @@
     function PlayerHud(){ // function qui affichera les information du joueur
     
         document.getElementById("coins").innerHTML = 
-            `${baseMoneyPlayer.toFixed(2)}`;
+            `${baseMoneyPlayer.toFixed(2)}€`;
         document.getElementById('milk').innerHTML =
-            `${milkStocked}`;
+            `${milkStocked}L`;
         document.getElementById("time").innerHTML =
-            ` ${timeCalculator()}`;
+            ` ${timeCalculator()} days`;
     }
     
 
@@ -116,7 +116,7 @@
         if (timeElapsed % 1460 == 0) {
             pacs = herd.length * pacsForSingleCow;
             baseMoneyPlayer += pacs;
-            Error(`You received ${pacsForSingleCow}$ for each cow. For a total of pacs ${pacs}`);
+            Error(`You received ${pacsForSingleCow}€ for each cow. For a total of ${pacs}€`);
         }
     }
 
