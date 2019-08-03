@@ -2,8 +2,8 @@
 (() => {
     let Cow = class Cow {
         constructor() {
-            let spanLife = 7300;
-            let currentLifeTime = 0;
+            this.spanLife = 7300;
+            this.currentLifeTime = this.spanLife;
         }
 
     }
@@ -34,6 +34,7 @@
     let MilkPriceSellJustRuledPlayer = 0.40;
     let MilkProductionPriceJustRuledPlayer = 0.40;
 
+    let generalLifeCost = 0.5;
 
     let cowCost = 1435;
     let groundCost = 6000;
@@ -64,7 +65,7 @@
     function PlayerHud(){ // function qui affichera les information du joueur
     
         document.getElementById("coins").innerHTML = 
-            `${baseMoneyPlayer.toFixed(2)}`;
+            `${baseMoneyPlayer.toFixed(0)}`;
         document.getElementById('milk').innerHTML =
             `${milkStocked}`;
         document.getElementById("time").innerHTML =
@@ -219,22 +220,23 @@
         
     });
 
-    // document.getElementById("creditConfirm").addEventListener("click",() => {
-    //     let amount = document.getElementById("moneyLawn").value;
-    //     let timeToPay = document.getElementById("paybackTime").value*12;
-    //     baseMoneyPlayer += +amount;
-    //     creditPlayer.push(new Loan(amount,timeToPay));
 
-    //     Error(`
-    //     you concrated a credit of ${creditPlayer[creditPlayer.length-1].amount}$, <br /> 
-    //     for a total of ${creditPlayer[creditPlayer.length-1].TotalCreditCost}$<br />
-    //     This will be ${creditPlayer[creditPlayer.length-1].monthToPay} month long.
-    //     `
-    //     );
 
-    // });
+    function killingCow(){
+        herd.forEach((el,id,arr) => {
+            el.currentLifeTime--;
+            el.currentLifeTime<=0?arr.splice(id, 1):"";
+        });
+    }
 
-    function main() {
+    function logTheShit(){
+        console.clear();
+        herd.forEach((el,id,arr) =>{
+                console.log(`${el.currentLifeTime}`);
+            });
+        }
+
+    function main(loop) {
         PlayerHud();
         production();
 
@@ -245,18 +247,25 @@
 
         PACS();
 
+        killingCow();
+
+        logTheShit();
+
+        baseMoneyJustRuledPlayer -= generalLifeCost;
+        baseMoneyPlayer-= generalLifeCost;
+
         if(baseMoneyPlayer <= 0 && milkStocked > 0){
             document.getElementById("sellMilk").click();
             Error("you ran out of money, automaticaly sell all the milk.");
         }
         else if(baseMoneyPlayer <= 0 && milkStocked <= 0){
-            clearInterval(mainLoop);
+            clearInterval(loop);
             Error("No money, No milk... You Lose! Sorry!");
         }
 
     }
 
-    let mainLoop = setInterval(main, LoopSpeed);
+    let mainLoop = setInterval(()=>{main(mainLoop)}, LoopSpeed);
 
 })();
 
