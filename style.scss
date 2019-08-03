@@ -11,11 +11,23 @@ body {
     margin: 0;
 }
 
+.container {
+    width: 50%;
+}
+
 h1{
     font-family: 'Galada', cursive;
     text-align: center;
+    margin: 30px;
 }
-
+progress {
+    display: block;
+    margin: auto;
+}
+#ProgressPlayer{
+    width: 75%;
+    margin: auto;
+}
 #divError {
     display:none;
 }

@@ -1,3 +1,4 @@
+import {coins} from './assets/coins.svg'; 
 (() => {
     let Cow = class Cow {
         constructor(){
@@ -56,16 +57,23 @@ function timeCalculator()
 
     return dayPassed.toFixed(0);
 }
+// ${baseMoneyPlayer.toFixed(2)} / ${baseMoneyJustRuledPlayer}``
 
 function PlayerHud(){ // function qui affichera les information du joueur
     document.getElementById("gameInformation").innerHTML = 
     `
-    ${baseMoneyPlayer.toFixed(2)} / ${baseMoneyJustRuledPlayer}<br />
-    <progress id="ProgressPlayer" max="${baseMoneyJustRuledPlayer}" value="${baseMoneyPlayer}"> ${baseMoneyPlayer} / ${baseMoneyJustRuledPlayer} </progress><br />
-    You have ${milkStocked}L of milk stocked.<br />
-    You own ${herd.length} cows in your herd.<br />
-    You own ${ground} ground. You need a ground for 3 cows.<br />
-    ${timeCalculator()} days passed<br />
+    <progress id="ProgressPlayer" max="${baseMoneyJustRuledPlayer}" value="${baseMoneyPlayer}"></progress><br />
+    <div class="row text-center">
+        <div class="col-4">
+            ${coins} ${baseMoneyPlayer.toFixed(2)}
+        </div>
+        <div class="col-4">
+            ${milkStocked}
+        </div>
+        <div class="col-4">
+            ${timeCalculator()}
+        </div>
+    </div>
     `;
 }
 
