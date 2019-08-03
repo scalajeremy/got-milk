@@ -24,27 +24,36 @@ h1{
 }
 
 .btn{
-    border-radius: 50px;
+    border-radius: 25px;
     padding: 10px;
     width: 10rem;
+    font-family: 'Baloo Chettan', cursive;
+    min-height: 70px;
 }
+
+.font{
+    font-family: 'Baloo Chettan', cursive;
+}
+
 #buyGroundButton{
     background-color: $terrain;
+    &:hover {
+        background: darken( $terrain, 10% );
+      }
 }
 #buyCowButton{
     background-color: $cow;
+    &:hover {
+        background: darken( $cow, 10% );
+      }
 }
 #sellMilk{
     background-color: $milk;
+    &:hover {
+        background: darken( $milk, 10% );
+      }
 }
-// progress {
-//     display: block;
-//     margin: auto;
-// }
-// #ProgressPlayer{
-//     width: 75%;
-//     margin: auto;
-// }
+
 #divError {
     display:none;
 }
