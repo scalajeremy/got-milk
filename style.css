@@ -35,4 +35,44 @@ h1 {
   display: none;
 }
 
+.buy {
+  background-image: url(./assets/terrain_buy.svg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  min-width: 200px;
+  min-height: 200px;
+}
+
+.one-cow {
+  background-image: url(./assets/terrain_one.svg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  min-width: 200px;
+  min-height: 200px;
+}
+
+.two-cow {
+  background-image: url(./assets/terrain_two.svg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  min-width: 200px;
+  min-height: 200px;
+}
+
+.three-cow {
+  background-image: url(./assets/terrain_three.svg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  min-width: 200px;
+  min-height: 200px;
+}
+
+.blank {
+  background-image: url(./assets/terrain_blank.svg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  min-width: 200px;
+  min-height: 200px;
+}
+
 /*# sourceMappingURL=style.css.map */

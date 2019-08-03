@@ -48,3 +48,42 @@ h1{
 #divError {
     display:none;
 }
+
+$terrain:  200px;
+
+.buy{
+    background-image: url(./assets/terrain_buy.svg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    min-width: $terrain;
+    min-height: $terrain;
+}
+
+.one-cow{
+    background-image: url(./assets/terrain_one.svg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    min-width: $terrain;
+    min-height: $terrain;
+}
+.two-cow{
+    background-image: url(./assets/terrain_two.svg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    min-width: $terrain;
+    min-height: $terrain;
+}
+.three-cow{
+    background-image: url(./assets/terrain_three.svg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    min-width: $terrain;
+    min-height: $terrain;
+}
+.blank{
+    background-image: url(./assets/terrain_blank.svg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    min-width: $terrain;
+    min-height: $terrain;
+}
