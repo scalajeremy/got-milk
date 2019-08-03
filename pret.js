@@ -4,8 +4,4 @@ let Loan = class Loan{
         this.monthToPay = monthToPay;
         let mensuality = amount/100*121;
     }
-
-
-    
-
 }

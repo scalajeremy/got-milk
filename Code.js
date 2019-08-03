@@ -1,4 +1,4 @@
-import {coins} from './assets/coins.svg'; 
+// import {coins} from './assets/coins.svg'; 
 (() => {
     let Cow = class Cow {
         constructor(){
@@ -60,21 +60,13 @@ function timeCalculator()
 // ${baseMoneyPlayer.toFixed(2)} / ${baseMoneyJustRuledPlayer}``
 
 function PlayerHud(){ // function qui affichera les information du joueur
-    document.getElementById("gameInformation").innerHTML = 
-    `
-    <progress id="ProgressPlayer" max="${baseMoneyJustRuledPlayer}" value="${baseMoneyPlayer}"></progress><br />
-    <div class="row text-center">
-        <div class="col-4">
-            ${coins} ${baseMoneyPlayer.toFixed(2)}
-        </div>
-        <div class="col-4">
-            ${milkStocked}
-        </div>
-        <div class="col-4">
-            ${timeCalculator()}
-        </div>
-    </div>
-    `;
+    
+    document.getElementById("coins").innerHTML = 
+        `${baseMoneyPlayer.toFixed(2)}`;
+    document.getElementById('milk').innerHTML =
+        `${milkStocked}`;
+    document.getElementById("time").innerHTML =
+        ` ${timeCalculator()}`;
 }
 
 function production()
