@@ -182,15 +182,14 @@
                 </div>
                 <div class="modal-footer">
                 <button type="button" id ="clear" class="btn btn-secondary" data-dismiss="modal">Refuse</button>
-                <button id="func" id='clear' type="button" class="btn btn-primary" data-dismiss="modal">Accept</button>
+                <button id="func" type="button" class="btn btn-primary" data-dismiss="modal">Accept</button>
                 </div>
             </div>
         </div>
     </div>`;
         document.getElementById('modal-target').innerHTML = modal;
 
-        document.getElementById('func').addEventListener('click', () => {func(moneyToLoan, year);})
-        document.getElementById('clear').addEventListener('click', () => document.getElementById('modal-target').innerHTML = '');
+        document.getElementById('func').addEventListener('click', () => {document.getElementById('modal-target').innerHTML = '' ; func(moneyToLoan, year);})
     }
 
     function creditAction(moneyToLoan, year) {
