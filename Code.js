@@ -30,7 +30,7 @@
     let creditJustRuledPlayer = [];
 
     let MilkPriceSellPlayer = 0.27;
-    let MilkProductionPricePlayer = 0.40;
+    let MilkProductionPricePlayer = 0.45;
 
     let MilkPriceSellJustRuledPlayer = 0.40;
     let MilkProductionPriceJustRuledPlayer = 0.40;
@@ -83,12 +83,12 @@
     let ground = 0; // number of ground
 
     let cowforGround = 3;
-    let pacsForSingleCow = 150;
+    let pacsForSingleCow = 125;
 
     let milkStocked = 0;
 
     let timeElapsed = 0;
-    let LoopSpeed = 15;
+    let LoopSpeed = 66;
 
     let objectTemp = {};
 
@@ -338,6 +338,17 @@
     }
 
     function main(loop) {
+
+        if(baseMoneyPlayer <= 0) {
+            baseMoneyPlayer = 0;
+            clearInterval(loop);
+            Error("No money, No milk... You Lose! Sorry!");
+            PlayerHud();
+
+        }
+       
+        
+
         PlayerHud();
         production();
 
@@ -348,17 +359,7 @@
 
         PACS();
 
-        if (baseMoneyPlayer <= 0 && milkStocked > 0) {
-            document.getElementById("sellMilk").click();
-            Error("you ran out of money, automaticaly sell all the milk.");
-        }
-        else if (baseMoneyPlayer <= 0 && milkStocked <= 0) {
-            baseMoneyPlayer = 0;
-            clearInterval(loop);
-            Error("No money, No milk... You Lose! Sorry!");
-            PlayerHud();
-
-        }
+        
 
     }
 
