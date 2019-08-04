@@ -40,46 +40,46 @@
     let groundCost = 6000;
 
     let herd = [];
-    
+
     let herdTemplate = [
         {
-                possessed: false,
-                cows:[],
+            possessed: false,
+            cows: [],
         },
         {
-                possessed: false,
-                cows:[],
+            possessed: false,
+            cows: [],
         },
         {
-                possessed: false,
-                cows:[],
+            possessed: false,
+            cows: [],
         },
         {
-                possessed: false,
-                cows:[],
+            possessed: false,
+            cows: [],
         },
         {
-                possessed: false,
-                cows:[],
+            possessed: false,
+            cows: [],
         },
         {
-                possessed: false,
-                cows:[],
+            possessed: false,
+            cows: [],
         },
         {
-                possessed: false,
-                cows:[],
+            possessed: false,
+            cows: [],
         },
         {
-                possessed: false,
-                cows:[],
+            possessed: false,
+            cows: [],
         },
         {
-                possessed: false,
-                cows:[],
+            possessed: false,
+            cows: [],
         },
     ]; // troupeau 
-    console.log(herdTemplate)
+    
     let ground = 0; // number of ground
 
     let cowforGround = 3;
@@ -88,9 +88,9 @@
     let milkStocked = 0;
 
     let timeElapsed = 0;
-    let LoopSpeed = 1;
+    let LoopSpeed = 15;
 
-    let objectTemp= {};
+    let objectTemp = {};
 
     function Error(string) {
         let error = document.getElementById('divError');
@@ -98,22 +98,45 @@
         error.innerText = string;
     }
 
-    function timeCalculator() {
-        let dayPassed = timeElapsed / 4;
+    let viewDayPassed = 1;
+    let viewmonthPassed = 1;
+    let viewyearPassed = 0;
 
-        return dayPassed.toFixed(0);
+    function timeCalculator() {
+        viewdate = "";
+
+        let dayPassed = (timeElapsed/4).toFixed(0);
+
+        if(dayPassed % 4 == 0 ){
+            viewDayPassed++;
+        }
+
+        if(viewDayPassed > 30){
+            viewDayPassed = 1;
+            viewmonthPassed++
+        }
+        if(viewmonthPassed > 12){
+            viewmonthPassed = 1;
+            viewyearPassed++;
+        }
+
+
+        viewdate = viewyearPassed.toFixed(0) + " Y ";
+        viewdate += viewmonthPassed.toFixed(0)+ " M ";
+        viewdate += viewDayPassed.toFixed(0) + " D";
+        
+        return viewdate;
     }
 
-    function PlayerHud(){ // function qui affichera les information du joueur
-    
-        document.getElementById("coins").innerHTML = 
+    function PlayerHud() { // function qui affichera les information du joueur
+
+        document.getElementById("coins").innerHTML =
             `${baseMoneyPlayer.toFixed(2)}€`;
         document.getElementById('milk').innerHTML =
             `${milkStocked}L`;
         document.getElementById("time").innerHTML =
-            ` ${timeCalculator()} days`;
+            ` ${timeCalculator()}`;
     }
-    
 
     function production() {
         milkStocked += herd.length;
@@ -189,20 +212,20 @@
     </div>`;
         document.getElementById('modal-target').innerHTML = modal;
 
-        document.getElementById('func').addEventListener('click', () => {document.getElementById('modal-target').innerHTML = '' ; func(moneyToLoan, year);})
-        document.getElementById('clear').addEventListener('click', () =>{document.getElementById('modal-target').innerHTML = ''})
-        
+        document.getElementById('func').addEventListener('click', () => { document.getElementById('modal-target').innerHTML = ''; func(moneyToLoan, year); })
+        document.getElementById('clear').addEventListener('click', () => { document.getElementById('modal-target').innerHTML = '' })
+
     }
 
     function creditAction(moneyToLoan, year) {
         creditPlayer.push(new Loan(moneyToLoan, year * 12));
         baseMoneyPlayer += +moneyToLoan;
 
-        if(moneyToLoan == cowCost){
+        if (moneyToLoan == cowCost) {
             document.getElementById("buyCowButton").click();
         }
 
-        if(moneyToLoan == groundCost){
+        if (moneyToLoan == groundCost) {
             document.getElementById("buyGroundButton").click();
         }
 
@@ -211,10 +234,10 @@
     function ia(action) {
         switch (action) {
             case "cow":
-                baseMoneyJustRuledPlayer < cowCost ? creditJustRuledPlayer.push(new Loan(1435, 3 * 12)) : baseMoneyJustRuledPlayer-= cowCost ;
+                baseMoneyJustRuledPlayer < cowCost ? creditJustRuledPlayer.push(new Loan(1435, 3 * 12)) : baseMoneyJustRuledPlayer -= cowCost;
                 break;
             case "ground":
-                baseMoneyJustRuledPlayer < groundCost ? creditJustRuledPlayer.push(new Loan(6000, 10 * 12)) : baseMoneyJustRuledPlayer-= groundCost;
+                baseMoneyJustRuledPlayer < groundCost ? creditJustRuledPlayer.push(new Loan(6000, 10 * 12)) : baseMoneyJustRuledPlayer -= groundCost;
                 break;
             case "sell":
                 baseMoneyJustRuledPlayer += milkStocked * MilkPriceSellJustRuledPlayer;
@@ -228,7 +251,6 @@
                 break;
         }
     }
-
 
     document.getElementById("buyCowButton").addEventListener("click", () => {
         if (ground == 0) {
@@ -249,17 +271,16 @@
                 ia("cow");
                 for (let i = 0; i < herdTemplate.length; i++) {
                     const element = herdTemplate[i];
-                    if (element.cows.length <3){
+                    if (element.cows.length < 3) {
                         element.cows.push(new Cow)
                         break;
                     }
-                    
+
                 }
                 checkCows();
             }
         }
     });
-
 
     document.getElementById("buyGroundButton").addEventListener("click", () => {
         if (groundCost <= baseMoneyPlayer) {
@@ -268,41 +289,39 @@
             ia("ground")
             for (let i = 0; i < herdTemplate.length; i++) {
                 const element = herdTemplate[i];
-                if (element.possessed === false){
-                    element.possessed =true;
-                    document.getElementById(i+1).innerHTML=' <div class="blank"></div>';
+                if (element.possessed === false) {
+                    element.possessed = true;
+                    document.getElementById(i + 1).innerHTML = ' <div class="blank"></div>';
                     break;
                 }
             }
             checkCows();
-            
+
         }
         else {
             Error("too poor to buy a ground, make a credit or wait for benefit.");
             modal("too poor to buy a ground,", 6000, 10, creditAction);
         }
-        
+
     });
 
     document.getElementById("sellMilk").addEventListener("click", () => {
         baseMoneyPlayer += milkStocked * MilkPriceSellPlayer;
         ia("sell");
         milkStocked = 0;
-        
+
     });
 
-    
-    
-   function checkCows(){
-        herdTemplate.forEach((enclo,i=0) => {
+    function checkCows() {
+        herdTemplate.forEach((enclo, i = 0) => {
             i++
             html = document.getElementById(i);
-            if(!enclo.possessed){
+            if (!enclo.possessed) {
                 html.innerHTML = '<div class="buy"></div>';
-            }else{
-                switch(enclo.cows.length){
+            } else {
+                switch (enclo.cows.length) {
                     case 0:
-                        html.innerHTML =' <div class="blank"></div>';
+                        html.innerHTML = ' <div class="blank"></div>';
                         break;
                     case 1:
                         html.innerHTML = '<div class="one-cow"></div>'
@@ -317,6 +336,7 @@
             }
         });
     }
+
     function main(loop) {
         PlayerHud();
         production();
@@ -327,12 +347,12 @@
         payTheManJustRuled();
 
         PACS();
-        
-        if(baseMoneyPlayer <= 0 && milkStocked > 0){
+
+        if (baseMoneyPlayer <= 0 && milkStocked > 0) {
             document.getElementById("sellMilk").click();
             Error("you ran out of money, automaticaly sell all the milk.");
         }
-        else if(baseMoneyPlayer <= 0 && milkStocked <= 0){
+        else if (baseMoneyPlayer <= 0 && milkStocked <= 0) {
             baseMoneyPlayer = 0;
             clearInterval(loop);
             Error("No money, No milk... You Lose! Sorry!");
@@ -342,7 +362,7 @@
 
     }
 
-    let mainLoop = setInterval(() => {main(mainLoop)}, LoopSpeed);
+    let mainLoop = setInterval(() => { main(mainLoop) }, LoopSpeed);
 
 })();
 
