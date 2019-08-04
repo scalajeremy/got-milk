@@ -190,6 +190,8 @@
         document.getElementById('modal-target').innerHTML = modal;
 
         document.getElementById('func').addEventListener('click', () => {document.getElementById('modal-target').innerHTML = '' ; func(moneyToLoan, year);})
+        document.getElementById('clear').addEventListener('click', () =>{document.getElementById('modal-target').innerHTML = ''})
+
     }
 
     function creditAction(moneyToLoan, year) {
@@ -255,7 +257,6 @@
             ground++;
             baseMoneyPlayer -= groundCost;
             ia("ground")
-            checkCows();
             for (let i = 0; i < herdTemplate.length; i++) {
                 const element = herdTemplate[i];
                 if (element.possessed === false){
@@ -264,6 +265,8 @@
                     break;
                 }
             }
+            checkCows();
+            
         }
         else {
             Error("too poor to buy a ground, make a credit or wait for benefit.");
