@@ -191,12 +191,21 @@
 
         document.getElementById('func').addEventListener('click', () => {document.getElementById('modal-target').innerHTML = '' ; func(moneyToLoan, year);})
         document.getElementById('clear').addEventListener('click', () =>{document.getElementById('modal-target').innerHTML = ''})
-
+        
     }
 
     function creditAction(moneyToLoan, year) {
         creditPlayer.push(new Loan(moneyToLoan, year * 12));
         baseMoneyPlayer += +moneyToLoan;
+
+        if(moneyToLoan == cowCost){
+            document.getElementById("buyCowButton").click();
+        }
+
+        if(moneyToLoan == groundCost){
+            document.getElementById("buyGroundButton").click();
+        }
+
     }
 
     function ia(action) {
@@ -308,7 +317,7 @@
             }
         });
     }
-    function main() {
+    function main(loop) {
         PlayerHud();
         production();
 
@@ -324,13 +333,16 @@
             Error("you ran out of money, automaticaly sell all the milk.");
         }
         else if(baseMoneyPlayer <= 0 && milkStocked <= 0){
-            clearInterval(mainLoop);
+            baseMoneyPlayer = 0;
+            clearInterval(loop);
             Error("No money, No milk... You Lose! Sorry!");
+            PlayerHud();
+
         }
 
     }
 
-    let mainLoop = setInterval(main, LoopSpeed);
+    let mainLoop = setInterval(() => {main(mainLoop)}, LoopSpeed);
 
 })();
 
